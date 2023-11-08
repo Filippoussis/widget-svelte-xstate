@@ -6,4 +6,4 @@
   }
 </script>
 
-<input class="rooxFormInput" type="password" placeholder="Пароль" on:input={handleChange}>
+<input class="formInput" type="password" placeholder="Пароль" on:input={handleChange}>

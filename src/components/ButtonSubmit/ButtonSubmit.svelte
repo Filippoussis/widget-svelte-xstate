@@ -2,6 +2,6 @@
   export let disabled: boolean;
 </script>
 
-<button class="rooxFormButtonSubmit" disabled={disabled}>
+<button class="formButtonSubmit" disabled={disabled}>
   Отправить
 </button>

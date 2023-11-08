@@ -1,3 +1,3 @@
-<div class="rooxLoading">
+<div class="loading">
   Loading...
 </div>

@@ -6,4 +6,4 @@
   }
 </script>
 
-<input class="rooxFormInput" type="text" on:input={handleChange}>
+<input class="formInput" type="text" on:input={handleChange}>

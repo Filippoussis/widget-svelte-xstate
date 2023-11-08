@@ -2,7 +2,7 @@
   export let errors: { message: string }[];
 </script>
 
-<ul class="rooxErrorMessages">
+<ul class="errorMessages">
   {#each errors as error}
     <li>{error.message}</li>
   {/each}
