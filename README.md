@@ -1,47 +1,37 @@
-# Svelte + TS + Vite
+# Svelte + XState (Finite State Machine)
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
 
-## Recommended IDE Setup
+## Проблема
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+1. Логика
 
-## Need an official Svelte framework?
+>Логика виджетов аутентификации основана на изменении представления виджета в зависимости от текущего шага сценария аутентификации или по другому состояния.
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+>При этом инструменты для реализации подобного поведения зависят от выбранного ui фреймворка на котором пишется основной клиентский код виджета. В частности, при использовании React, работу по менеджменту состояния приложения выполняет одна из библиотек его экосистемы      (redux-thunk, redux-toolkit, redux-saga и др).
 
-## Technical considerations
+2. Размер бандла
 
-**Why use this over SvelteKit?**
+>Для целей встраивания виджета в сторонние веб-сервисы, желательно, чтобы результирующий бандл имел минимально возможный размер.
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+>Приложения же, написанные на Реакте  тянут в результирующий бандл ui библиотеку целиком, что не совсем оптимально.
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+## Задача
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+1. Сделать логику виджетов независимой от ui фреймворка, и легко переносимой.
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+2. По возможности минимизировать размер результирующего бандла виджета.
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+## Решение
 
-**Why include `.vscode/extensions.json`?**
+1. Решение основано на идее использования конечных автоматов, в частности js библиотеки XState, которая их реализует.
+> логика виджетов независима от ui фреймворков, и легко переносится между ними.
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+> диаграмма состояний вместе с визуализатором XState помогает моделировать логику конечных автоматов, наглядно демонстрировать возможные состояния и переходы, что, вероятно, может быть полезным при проектировании, а также при онбординге разработчиков.
 
-**Why enable `allowJs` in the TS template?**
+2. Предлагается рассмотреть возможность реализации виджетов на “исчезающем” фреймворке Svelte, в котором в результирующий бандл попадает только js код бизнес логики, а фреймворк “исчезает” из бандла, делая его минимальным.
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+> оказываем общее положительное влияние на работу клиентского веб-сервиса.
 
-**Why is HMR not preserving my local component state?**
+##  Visualizer XState
 
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+Посмотреть и пройти сценарий аутентификации самостоятельно с помощью визуализатора XState можно по ссылке https://stately.ai/registry/editor/e2eb99f8-6f8a-4dc7-bba2-503523896bda?machineId=0fce8346-7413-45e0-bd81-2dc54c203960&mode=Design
