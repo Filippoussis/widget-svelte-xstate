@@ -6,12 +6,12 @@ import type { SSOResponseSchema } from '../api/sso/interfaces';
 import { EventID } from '../api/sso/interfaces';
 
 export const authParams = {
-  client_id: import.meta.env.CLIENT_ID,
-  client_secret: import.meta.env.CLIENT_SECRET,
-  realm: import.meta.env.REALM,
-  grant_type: import.meta.env.GRANT_TYPE,
-  service: import.meta.env.SERVICE,
-  redirect_uri: import.meta.env.REDIRECT_URI,
+  client_id: import.meta.env.VITE_CLIENT_ID,
+  client_secret: import.meta.env.VITE_CLIENT_SECRET,
+  realm: import.meta.env.VITE_REALM,
+  grant_type: import.meta.env.VITE_GRANT_TYPE,
+  service: import.meta.env.VITE_SERVICE,
+  redirect_uri: import.meta.env.VITE_REDIRECT_URI,
 };
 
 inspect({
