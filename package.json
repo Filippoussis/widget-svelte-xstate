@@ -12,10 +12,16 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
     "@tsconfig/svelte": "^5.0.0",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "svelte": "^4.0.5",
     "svelte-check": "^3.4.6",
     "tslib": "^2.6.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "@xstate/inspect": "^0.8.0",
+    "@xstate/svelte": "^2.1.0",
+    "xstate": "^4.38.3"
   }
 }
