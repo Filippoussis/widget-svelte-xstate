@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import {
-    ButtonSubmit, LoginField, PasswordField, OtpCodeField, ErrorMessages, Loading
+    ButtonSubmit, LoginField, PasswordField,
+    OtpCodeField, ErrorMessages, Loading, Success
   } from './components';
   import { AuthForm, OtpForm } from './screens';
   import { authService } from './libs/fsm/authMachine';
@@ -17,6 +18,8 @@
     || $authService.matches('OtpForm.Loading')
   }
     <Loading />
+  {:else if $authService.matches('OtpForm.Success')}
+    <Success />
   {:else if $authService.matches('AuthForm')}
     <AuthForm>
       <LoginField slot="login" />

@@ -1,3 +1,3 @@
 <div class="form">
-  Loading...
+  Success
 </div>
